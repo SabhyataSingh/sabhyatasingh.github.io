@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects | Sabhyata Singh</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="icon" type="image/png" href="logo.png">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #0f172a;
+            color: #e2e8f0;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1140px;
+            margin-left: auto;
+            margin-right: auto;
+            padding-left: 1.5rem;
+            padding-right: 1.5rem;
+        }
+
+        /* Header & Navigation */
+        #header {
+            background-color: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 50;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        }
+
+        #header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+        }
+
+        .logo {
+            font-size: 1.875rem;
+            font-weight: 700;
+        }
+
+        .main-nav {
+            display: none;
+        }
+
+        .main-nav a {
+            padding: 0.5rem 0;
+            margin: 0 1rem;
+        }
+
+        .nav-link {
+            color: #cbd5e1;
+            font-weight: 500;
+            transition: color 0.3s ease-out;
+            position: relative;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            color: #22d3ee;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: #22d3ee;
+            transform: scaleX(0);
+            transform-origin: bottom right;
+            transition: transform 0.3s ease-out;
+        }
+
+        .nav-link:hover::after,
+        .nav-link.active::after {
+            transform: scaleX(1);
+            transform-origin: bottom left;
+        }
+
+        /* Mobile Menu */
+        #mobile-menu-button {
+            background: none;
+            border: none;
+            color: #cbd5e1;
+            cursor: pointer;
+        }
+
+        #mobile-menu-button svg {
+            width: 1.75rem;
+            height: 1.75rem;
+        }
+
+        #mobile-menu {
+            display: none;
+            padding: 0 1.5rem 1rem 1.5rem;
+            border-top: 1px solid #334155;
+        }
+
+        #mobile-menu a {
+            display: block;
+            padding-top: 0.5rem;
+            padding-bottom: 0.5rem;
+        }
+
+        /* Main Content */
+        main {
+            padding-top: 6rem;
+        }
+
+        #projects {
+            padding-top: 5rem;
+            padding-bottom: 5rem;
+        }
+
+        .section-heading {
+            font-size: 2.25rem;
+            font-weight: 700;
+            margin-bottom: 3rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .section-heading::after {
+            content: '';
+            width: 5rem;
+            height: 0.25rem;
+            background-color: #22d3ee;
+            position: absolute;
+            bottom: -1rem;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 9999px;
+        }
+
+        /* Project Grid */
+        .projects-grid {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        /* Card Styling */
+        .card {
+            background-color: #1e293b;
+            border-radius: 1rem;
+            border: 1px solid #334155;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease-in-out;
+            overflow: hidden;
+            /* To contain the scaled image */
+            flex: 0 1 350px;
+            /* Let flexbox handle the width */
+        }
+
+        .card:hover {
+            border-color: #22d3ee;
+            box-shadow: 0 0 25px rgba(34, 211, 238, 0.2);
+        }
+
+        .card-image-container {
+            overflow: hidden;
+        }
+
+        .card-image {
+            width: 100%;
+            height: 12rem;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .card:hover .card-image {
+            transform: scale(1.1);
+        }
+
+        .card-content {
+            padding: 1.5rem;
+        }
+
+        .card-content h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #ffffff;
+            margin-bottom: 0.5rem;
+        }
+
+        .card-content p {
+            color: #94a3b8;
+            margin-bottom: 1rem;
+            font-size: 0.875rem;
+        }
+
+        .card-content a {
+            font-weight: 600;
+            color: #22d3ee;
+        }
+
+        .card-content a:hover {
+            text-decoration: underline;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #0f172a;
+            border-top: 1px solid #1e293b;
+            margin-top: 5rem;
+            padding: 2rem 0;
+            text-align: center;
+            color: #94a3b8;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .social-links a {
+            transition: color 0.3s;
+        }
+
+        .social-links a:hover {
+            color: #22d3ee;
+        }
+
+        .social-links svg {
+            width: 1.5rem;
+            height: 1.5rem;
+        }
+
+        /* Animations & Utils */
+        .page-content {
+            animation: fadeIn 0.8s forwards;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .gradient-text {
+            background-image: linear-gradient(to right, #22d3ee, #818cf8);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        /* Responsive Design */
+        @media (min-width: 768px) {
+            .main-nav {
+                display: flex;
+                align-items: center;
+            }
+
+            #mobile-menu-button {
+                display: none;
+            }
+
+            .section-heading {
+                font-size: 3rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header id="header">
+        <div class="container">
+            <a href="index.html" class="logo gradient-text">SS</a>
+            <nav class="main-nav">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="about.html" class="nav-link">About</a>
+                <a href="projects.html" class="nav-link active">Projects</a>
+                <a href="gallery.html" class="nav-link">Gallery</a>
+                <a href="contact.html" class="nav-link">Contact</a>
+            </nav>
+            <button id="mobile-menu-button">
+                <i data-lucide="menu"></i>
+            </button>
+        </div>
+        <div id="mobile-menu">
+            <a href="index.html" class="nav-link">Home</a>
+            <a href="about.html" class="nav-link">About</a>
+            <a href="projects.html" class="nav-link">Projects</a>
+            <a href="gallery.html" class="nav-link">Gallery</a>
+            <a href="contact.html" class="nav-link">Contact</a>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- Projects Page Content -->
+        <section id="projects" class="page-content">
+            <h2 class="section-heading">My Projects</h2>
+            <div class="projects-grid">
+                <!-- Project Card 1 -->
+                <div class="card">
+                    <div class="card-image-container">
+                        <img src="dashboard.png" alt="Project 1" class="card-image">
+                    </div>
+                    <div class="card-content">
+                        <h3>Retail Sales Dashboard</h3>
+                        <p>Interactive Power BI dashboard for analyzing sales data and tracking KPIs.</p>
+                        <a href="dashboard.png">View Details &rarr;</a>
+                    </div>
+                </div>
+                <!-- Project Card 3 -->
+                <div class="card">
+                    <div class="card-image-container">
+                        <img src="https://placehold.co/600x400/0f172a/22d3ee?text=Project+3" alt="Project 3"
+                            class="card-image">
+                    </div>
+                    <div class="card-content">
+                        <h3>Portfolio Website</h3>
+                        <p>This personal portfolio built with standard CSS and JavaScript.</p>
+                        <a href="#">View Source &rarr;</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="social-links">
+                <a href="https://www.linkedin.com/in/sabhyatasingh/" aria-label="LinkedIn"><i
+                        data-lucide="linkedin"></i></a>
+                <a href="https://github.com/SabhyataSingh" aria-label="GitHub"><i data-lucide="github"></i></a>
+            </div>
+            <p>&copy; <span id="current-year"></span> Sabhyata Singh. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+        document.getElementById('mobile-menu-button').addEventListener('click', () => {
+            const mobileMenu = document.getElementById('mobile-menu');
+            if (mobileMenu.style.display === 'block') {
+                mobileMenu.style.display = 'none';
+            } else {
+                mobileMenu.style.display = 'block';
+            }
+        });
+    </script>
+</body>
+
+</html>

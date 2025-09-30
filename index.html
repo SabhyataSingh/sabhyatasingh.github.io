@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sabhyata Singh | Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="logo.png">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        /* CSS Reset & Basic Styles - Technical Theme Palette */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #0A192F; /* Deep Navy Blue */
+            color: #CCD6F6; /* Light Blue-Gray Text */
+        }
+        
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+            padding-left: 1.5rem;
+            padding-right: 1.5rem;
+        }
+
+        /* Header & Navigation */
+        #header {
+            background-color: rgba(10, 25, 47, 0.95);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 50;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        #header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: 800;
+        }
+
+        .main-nav {
+            display: none; 
+        }
+        
+        .nav-link {
+            color: #CCD6F6;
+            font-weight: 500;
+            transition: color 0.3s ease-out;
+            position: relative;
+            padding: 0.5rem 0;
+            margin: 0 1.2rem;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            color: #64FFDA; /* Neon Mint Accent */
+        }
+        
+        /* Underline effect for links */
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: #64FFDA;
+            transform: scaleX(0);
+            transform-origin: bottom right;
+            transition: transform 0.3s ease-out;
+        }
+
+        .nav-link:hover::after, .nav-link.active::after {
+            transform: scaleX(1);
+            transform-origin: bottom left;
+        }
+
+        /* Mobile Menu */
+        #mobile-menu-button {
+            background: none;
+            border: none;
+            color: #64FFDA;
+            cursor: pointer;
+        }
+        
+        #mobile-menu-button svg {
+            width: 2rem;
+            height: 2rem;
+        }
+
+        #mobile-menu {
+            display: none; 
+            padding: 0 1.5rem 1rem 1.5rem;
+            border-top: 1px solid #112240; 
+        }
+        
+        #mobile-menu a {
+            display: block;
+            padding-top: 0.75rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid #112240; 
+        }
+
+        /* Main Content & Home Section */
+        main {
+            padding-top: 8rem;
+        }
+
+        #home {
+            min-height: calc(100vh - 8rem);
+            display: flex;
+            align-items: center;
+            padding-bottom: 4rem;
+        }
+
+        .home-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+        
+        /* Mobile: Text (1) then Image (2) */
+        .home-text-content {
+            order: 1;
+            text-align: center;
+            animation: slideInLeft 1s ease-out;
+        }
+
+        .home-text-content h1 {
+            font-size: 2.5rem;
+            line-height: 1.2;
+            font-weight: 800;
+            color: #ffffff;
+            margin-bottom: 1rem;
+            /* Improved text shadow for main heading */
+            text-shadow: 0 0 10px rgba(100, 255, 218, 0.5); 
+        }
+        
+        .gradient-text {
+            /* Text Color Accent */
+            background-image: linear-gradient(to right, #64FFDA, #5BC0EB);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        /* Style for 'Hi, I'm' */
+        .greeting-text {
+            color: #64FFDA !important; /* Make greeting neon and prominent */
+            font-size: 1.25rem !important; 
+            margin-bottom: 0.75rem !important; 
+            letter-spacing: 4px; /* Increased tracking */
+            font-weight: 500;
+            text-transform: uppercase;
+        }
+
+        /* Style for the dynamic role text */
+        .role-text {
+            font-size: 1.75rem; /* Increased size */
+            font-weight: 700;
+            color: #64FFDA; 
+            margin-bottom: 1.5rem;
+            letter-spacing: 1px;
+            min-height: 3rem; /* Ensure space for the typing text */
+        }
+
+        .intro-paragraph {
+            font-size: 1.125rem;
+            line-height: 1.75;
+            color: #A3A3B9; /* Slightly darker gray for better contrast */
+            margin-bottom: 2rem;
+        }
+
+        .button-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            justify-content: center;
+        }
+
+        /* Button Styling (Technical/Minimalist) */
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 2.5rem;
+            border-radius: 4px;
+            font-weight: 600;
+            transition: all 0.3s cubic-bezier(0.5, 0, 0.5, 1);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 0 5px rgba(100, 255, 218, 0.1);
+        }
+
+        .btn-primary {
+            background-color: transparent;
+            color: #64FFDA;
+            border: 1px solid #64FFDA;
+        }
+
+        .btn-primary:hover {
+            background-color: rgba(100, 255, 218, 0.1); 
+            box-shadow: 0 0 15px rgba(100, 255, 218, 0.6); 
+            transform: translateY(-3px);
+        }
+        
+        .btn-secondary {
+            background-color: #112240; /* Darker Blue */
+            color: #64FFDA;
+            border: 1px solid #112240;
+        }
+        
+        .btn-secondary:hover {
+            background-color: #1a2f4a;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Mobile: Image (2) */
+        .home-image-content {
+            order: 2;
+            display: flex;
+            justify-content: center;
+            animation: slideInRight 1s ease-out;
+        }
+
+        /* --- Updated Image Wrapper (Digital Offset Frame Style) --- */
+        .image-wrapper {
+            width: 18rem;
+            height: 18rem;
+            border-radius: 6px; /* Subtle rounding */
+            position: relative;
+            background-color: transparent;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.7); /* Deep shadow */
+            transition: all 0.5s ease;
+        }
+
+        .image-wrapper img {
+            width: 100%;
+            height: 100%;
+            border-radius: 6px; 
+            object-fit: cover;
+            filter: none;
+            transition: all 0.5s ease;
+            position: relative; 
+            z-index: 2; /* Image on top of pseudo-border */
+        }
+
+        /* Pseudo-element for the angled/skewed border effect */
+        .image-wrapper::after {
+            content: '';
+            position: absolute;
+            top: 15px; /* Starting offset */
+            left: 15px; /* Starting offset */
+            width: 100%;
+            height: 100%;
+            border: 2px solid #64FFDA; /* Neon border */
+            border-radius: 6px;
+            transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+            z-index: 1; /* Border behind the image */
+        }
+
+        /* Hover effect: Move the pseudo-element and scale the wrapper */
+        .image-wrapper:hover::after {
+            top: 5px;
+            left: 5px;
+            border-color: #5BC0EB; /* Hover color change */
+        }
+        
+        .image-wrapper:hover {
+            transform: scale(1.02);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.9);
+        }
+        /* --- End Image Wrapper Styles --- */
+
+        
+        /* Typewriter Cursor Styling */
+        .typewriter-cursor {
+            display: inline-block;
+            width: 3px;
+            height: 1.5rem;
+            background-color: #64FFDA;
+            animation: blink 0.7s infinite;
+            vertical-align: middle;
+            margin-left: 2px;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+        
+        /* Footer */
+        footer {
+            background-color: #0A192F; 
+            border-top: 1px solid #112240; 
+            margin-top: 5rem;
+            padding: 2rem 0;
+            text-align: center;
+            color: #8892B0; 
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .social-links a {
+            transition: color 0.3s, transform 0.3s;
+        }
+
+        .social-links a:hover {
+            color: #64FFDA; 
+            transform: translateY(-3px);
+        }
+        
+        .social-links svg {
+            width: 1.5rem;
+            height: 1.5rem;
+        }
+        
+        /* Utility Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideInLeft {
+            from { opacity: 0; transform: translateX(-50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        
+        @keyframes slideInRight {
+            from { opacity: 0; transform: translateX(50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        .page-content {
+            animation: fadeIn 1s forwards;
+        }
+
+        /* Responsive Design (Medium devices and up) */
+        @media (min-width: 768px) {
+            .main-nav {
+                display: flex;
+                align-items: center;
+            }
+            
+            #mobile-menu-button {
+                display: none;
+            }
+
+            #mobile-menu {
+                display: none !important; 
+            }
+
+            .home-grid {
+                grid-template-columns: 1fr 2fr; /* Image wider than text */
+                gap: 5rem;
+            }
+
+            /* Desktop: Image (1) then Text (2) */
+            .home-image-content {
+                order: 1;
+                justify-content: flex-start; /* Align image to the left */
+            }
+
+            .home-text-content {
+                order: 2;
+                text-align: left;
+            }
+            
+            .home-text-content h1 {
+                font-size: 4rem;
+            }
+
+            .home-text-content p {
+                font-size: 1.25rem;
+            }
+
+            .button-group {
+                justify-content: flex-start;
+            }
+            
+            .image-wrapper {
+                width: 20rem;
+                height: 20rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header id="header">
+        <div class="container">
+            <!-- Logo is styled with the bright gradient -->
+            <a href="index.html" class="logo gradient-text">S<span style="color:#64FFDA; margin-left: -5px;">S</span></a>
+            <nav class="main-nav">
+                <a href="index.html" class="nav-link active">Home</a>
+                <a href="about.html" class="nav-link">About</a>
+                <a href="projects.html" class="nav-link">Projects</a>
+                <a href="gallery.html" class="nav-link">Gallery</a>
+                <a href="contact.html" class="nav-link">Contact</a>
+            </nav>
+            <button id="mobile-menu-button">
+                <i data-lucide="menu"></i>
+            </button>
+        </div>
+        <div id="mobile-menu">
+            <a href="index.html" class="nav-link active">Home</a>
+            <a href="about.html" class="nav-link">About</a>
+            <a href="projects.html" class="nav-link">Projects</a>
+            <a href="gallery.html" class="nav-link">Gallery</a>
+            <a href="contact.html" class="nav-link">Contact</a>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <section id="home" class="page-content">
+                <div class="home-grid">
+                    
+                    <div class="home-image-content">
+                        <!-- Image with the new digital offset frame style -->
+                        <div class="image-wrapper">
+                            <img src="sabhyata.jpg.jpg" alt="Sabhyata Singh professional portrait">
+                        </div>
+                    </div>
+
+                    <div class="home-text-content">
+                        <!-- Updated Greeting Text Style -->
+                        <p class="greeting-text">“Welcome to my digital workspace</p>
+                        <h1>Sabhyata <span class="gradient-text">Singh</span></h1>
+                        <!-- Dynamic Role Text with Typewriter Effect (Increased Size) -->
+                        <p class="role-text">
+                            I am <span id="typewriter-text"></span><span class="typewriter-cursor"></span>
+                        </p>
+                        <!-- Introductory paragraph style refined for better hierarchy -->
+                        <p class="intro-paragraph">
+                            I specialize in building responsive web applications and solving complex data challenges. Explore my work below.
+                        </p>
+                        <div class="button-group">
+                            <!-- Buttons with glow/border effects -->
+                            <a href="sabhyata_singh_srmu_resume.pdf" class="btn btn-primary">Download Resume</a>
+                            <a href="https://www.linkedin.com/in/sabhyatasingh/" class="btn btn-secondary">Connect on LinkedIn</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+    
+    <footer>
+        <div class="container">
+            <div class="social-links">
+                <!-- Lucide icons are now neon-accented on hover -->
+                <a href="https://www.linkedin.com/in/sabhyatasingh/" aria-label="LinkedIn"><i data-lucide="linkedin"></i></a>
+                <a href="https://github.com/SabhyataSingh" aria-label="GitHub"><i data-lucide="github"></i></a>
+            </div>
+            <p>&copy; <span id="current-year"></span> Sabhyata Singh. Engineered with Code.</p>
+        </div>
+    </footer>
+    
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+
+        // --- Mobile Menu Toggle ---
+        document.getElementById('mobile-menu-button').addEventListener('click', () => {
+            const mobileMenu = document.getElementById('mobile-menu');
+            // Toggle visibility using block/none
+            mobileMenu.style.display = mobileMenu.style.display === 'block' ? 'none' : 'block';
+        });
+
+        // --- Typewriter Effect Implementation ---
+        const typewriterTextElement = document.getElementById('typewriter-text');
+        // Roles that will cycle
+        const textsToType = ["a Front-End Developer", "an Aspiring Data Analyst", "a ML & AI Innovator"];
+        let textIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+
+        function type() {
+            const currentText = textsToType[textIndex];
+            
+            if (!isDeleting) {
+                // Typing logic
+                if (charIndex < currentText.length) {
+                    typewriterTextElement.textContent += currentText.charAt(charIndex);
+                    charIndex++;
+                    setTimeout(type, 100); // Typing speed: 100ms
+                } else {
+                    // Start erasing after a pause 
+                    isDeleting = true;
+                    setTimeout(type, 2000); // Pause: 2 seconds
+                }
+            } else {
+                // Erasing logic 
+                if (charIndex > 0) {
+                    typewriterTextElement.textContent = currentText.substring(0, charIndex - 1);
+                    charIndex--;
+                    setTimeout(type, 50); // Erasing speed: 50ms (faster)
+                } else {
+                    // Move to the next text
+                    isDeleting = false;
+                    textIndex = (textIndex + 1) % textsToType.length;
+                    setTimeout(type, 500); // Pause before starting the next role
+                }
+            }
+        }
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            // Start the typewriter after a brief delay
+            setTimeout(type, 500);
+        });
+    </script>
+</body>
+</html>

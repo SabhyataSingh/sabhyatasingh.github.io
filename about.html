@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Me | Sabhyata Singh</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        /* CSS Reset & Basic Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #0f172a;
+            color: #e2e8f0;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1140px;
+            margin-left: auto;
+            margin-right: auto;
+            padding-left: 1.5rem;
+            padding-right: 1.5rem;
+        }
+
+        /* Header & Navigation */
+        #header {
+            background-color: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 50;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+        }
+
+        #header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 1rem;
+            padding-bottom: 1rem;
+        }
+
+        .logo {
+            font-size: 1.875rem;
+            font-weight: 700;
+        }
+
+        .main-nav {
+            display: none;
+            /* Hidden on mobile */
+        }
+
+        .main-nav a {
+            padding: 0.5rem 0;
+            margin: 0 1rem;
+        }
+
+        .nav-link {
+            color: #cbd5e1;
+            /* slate-300 */
+            font-weight: 500;
+            transition: color 0.3s ease-out;
+            position: relative;
+        }
+
+        .nav-link:hover {
+            color: #22d3ee;
+            /* cyan-400 */
+        }
+
+        .nav-link.active {
+            color: #22d3ee;
+            /* cyan-400 */
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: #22d3ee;
+            transform: scaleX(0);
+            transform-origin: bottom right;
+            transition: transform 0.3s ease-out;
+        }
+
+        .nav-link:hover::after,
+        .nav-link.active::after {
+            transform: scaleX(1);
+            transform-origin: bottom left;
+        }
+
+        /* Mobile Menu */
+        #mobile-menu-button {
+            background: none;
+            border: none;
+            color: #cbd5e1;
+            cursor: pointer;
+        }
+
+        #mobile-menu-button svg {
+            width: 1.75rem;
+            height: 1.75rem;
+        }
+
+        #mobile-menu {
+            display: none;
+            /* Initially hidden */
+            padding: 0 1.5rem 1rem 1.5rem;
+            border-top: 1px solid #334155;
+            /* slate-700 */
+        }
+
+        #mobile-menu a {
+            display: block;
+            padding-top: 0.5rem;
+            padding-bottom: 0.5rem;
+        }
+
+        /* Main Content */
+        main {
+            padding-top: 6rem;
+            /* Adjust based on header height */
+        }
+
+        #about {
+            padding-top: 2rem;
+            padding-bottom: 5rem;
+        }
+
+        .section-heading {
+            font-size: 3rem;
+            /* text-5xl */
+            font-weight: 800;
+            /* font-extrabold */
+            margin-bottom: 3rem;
+            /* mb-12 */
+            text-align: center;
+            position: relative;
+            transform: rotate(-1deg);
+            transition: transform 0.3s;
+            text-shadow: 0 0 15px rgba(34, 211, 238, 0.4);
+        }
+
+        .section-heading::after {
+            content: '';
+            width: 5rem;
+            /* w-20 */
+            height: 0.25rem;
+            /* h-1 */
+            background-color: #22d3ee;
+            /* bg-cyan-400 */
+            position: absolute;
+            bottom: -1rem;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 9999px;
+            /* rounded-full */
+        }
+
+        .about-content {
+            max-width: 64rem;
+            /* Increased width to accommodate columns */
+            margin: 0 auto;
+        }
+
+        .about-content .intro-text {
+            font-size: 1.25rem;
+            /* text-xl */
+            font-weight: 500;
+            /* font-medium */
+            margin-bottom: 1rem;
+            /* mb-4 */
+            text-align: center;
+        }
+
+        .about-content p {
+            font-size: 1.125rem;
+            /* text-lg */
+            line-height: 1.75;
+            /* leading-relaxed */
+            margin-bottom: 1.5rem;
+            /* mb-6 */
+        }
+
+        .highlight-box {
+            border-left: 4px solid #06b6d4;
+            /* border-l-4 border-cyan-500 */
+            padding-left: 1rem;
+            /* pl-4 */
+            background-color: rgba(30, 41, 59, 0.5);
+            /* bg-slate-800/50 */
+            padding: 1rem;
+            border-radius: 0.5rem;
+            /* rounded-lg */
+        }
+
+        .about-content h3 {
+            font-size: 1.5rem;
+            /* text-2xl */
+            font-weight: 600;
+            /* font-semibold */
+            margin-bottom: 1rem;
+            /* mb-4 */
+            color: #22d3ee;
+            /* text-cyan-400 */
+        }
+
+        .toolkit-list {
+            list-style-type: disc;
+            padding-left: 1.5rem;
+            /* pl-6 */
+            margin-bottom: 1.5rem;
+            /* mb-6 */
+        }
+
+        .toolkit-list li {
+            margin-bottom: 0.75rem;
+            /* space-y-3 */
+        }
+
+        .toolkit-list .list-title {
+            font-weight: 700;
+            /* font-bold */
+            color: #22d3ee;
+            /* text-cyan-400 */
+        }
+
+        .toolkit-list .tech-name {
+            font-weight: 600;
+            /* font-semibold */
+        }
+
+        .about-content .conclusion-text {
+            margin-top: 2rem;
+            /* mt-8 */
+        }
+
+        .section-divider {
+            border: none;
+            height: 1px;
+            background-color: #334155;
+            margin: 3rem 0;
+        }
+
+        .education-experience-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 3rem;
+        }
+
+        .section-subtitle {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 2rem;
+        }
+
+        .timeline-container {
+            position: relative;
+            border-left: 2px solid #334155;
+            padding-left: 2rem;
+        }
+
+        .timeline-container>.timeline-item+.timeline-item {
+            margin-top: 2rem;
+        }
+
+        .timeline-item {
+            position: relative;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: -38px;
+            top: 0.25rem;
+            width: 1.5rem;
+            height: 1.5rem;
+            background-color: #22d3ee;
+            border-radius: 9999px;
+            border: 4px solid #1e293b;
+        }
+
+        .timeline-date {
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: #22d3ee;
+        }
+
+        .timeline-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #ffffff;
+            margin-top: 0.25rem;
+        }
+
+        .timeline-desc {
+            color: #94a3b8;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #0f172a;
+            border-top: 1px solid #1e293b;
+            margin-top: 5rem;
+            padding: 2rem 0;
+            text-align: center;
+            color: #94a3b8;
+            /* slate-400 */
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .social-links a {
+            transition: color 0.3s;
+        }
+
+        .social-links a:hover {
+            color: #22d3ee;
+        }
+
+        .social-links svg {
+            width: 1.5rem;
+            height: 1.5rem;
+        }
+
+        /* Animations & Effects */
+        .page-content {
+            animation: fadeIn 0.8s forwards;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .gradient-text {
+            background-image: linear-gradient(to right, #22d3ee, #818cf8);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        /* Responsive Design */
+        @media (min-width: 768px) {
+            .main-nav {
+                display: flex;
+                align-items: center;
+            }
+
+            #mobile-menu-button {
+                display: none;
+            }
+
+            .section-heading {
+                font-size: 4.5rem;
+                /* md:text-7xl */
+            }
+
+            .education-experience-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header id="header">
+        <div class="container">
+            <a href="index.html" class="logo gradient-text">SS</a>
+            <nav class="main-nav">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="about.html" class="nav-link active">About</a>
+                <a href="projects.html" class="nav-link">Projects</a>
+                <a href="gallery.html" class="nav-link">Gallery</a>
+                <a href="contact.html" class="nav-link">Contact</a>
+            </nav>
+            <button id="mobile-menu-button">
+                <i data-lucide="menu"></i>
+            </button>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu">
+            <a href="index.html" class="nav-link">Home</a>
+            <a href="about.html" class="nav-link">About</a>
+            <a href="projects.html" class="nav-link">Projects</a>
+            <a href="gallery.html" class="nav-link">Gallery</a>
+            <a href="contact.html" class="nav-link">Contact</a>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- About Page Content -->
+        <section id="about" class="page-content">
+            <h1 class="section-heading">About Me</h1>
+            <div class="about-content">
+                <p class="intro-text gradient-text">
+                    Architecting Clarity from Chaos: Data Analyst | Frontend Developer
+                </p>
+
+                <p>
+                    I'm Sabhyata Singh, a Computer Science student at <span class="tech-name"
+                        style="color: #22d3ee;">Shri Ramswaroop Memorial University</span>. My core drive is to engineer
+                    the convergence between <strong>complex data structures</strong> and <strong>intuitive user
+                        interfaces</strong>. I don't just study technology; I use it to transform raw information into
+                    meaningful, accessible digital experiences.
+                </p>
+
+                <p class="highlight-box">
+                    My expertise is fundamentally dual-focused: applying rigorous <strong>Data Analytics</strong> to
+                    extract narratives, and using <strong>Frontend Development</strong> to visually communicate those
+                    narratives with precision and elegance. I thrive on continuous learning and building solutions that
+                    deliver both functionality and aesthetic appeal.
+                </p>
+
+                <h3>My Technical Toolkit & Focus Areas:</h3>
+                <ul class="toolkit-list">
+                    <li>
+                        <span class="list-title">Data Mastery:</span>
+                        I specialize in end-to-end data pipelines, from cleaning messy datasets with <span
+                            class="tech-name">Python (Pandas, NumPy)</span> to optimizing retrieval via <span
+                            class="tech-name">SQL</span> and <span class="tech-name">MongoDB</span>.
+                    </li>
+                    <li>
+                        <span class="list-title">Visual Engineering:</span>
+                        Bringing data to life through stunning and insightful visualizations. Proficient in creating
+                        actionable dashboards using tools like <span class="tech-name">Power BI</span>, <span
+                            class="tech-name">Seaborn</span>, and <span class="tech-name">Matplotlib</span>. I ensure
+                        complex trends are instantly understandable.
+                    </li>
+                    <li>
+                        <span class="list-title">Modern Web Development:</span>
+                        I craft responsive, high-performance web applications using the core triad of <span
+                            class="tech-name">HTML5, CSS3, and JavaScript</span>, specializing in modern utility
+                        frameworks like <span class="tech-name">Tailwind CSS</span> for rapid, beautiful UI creation.
+                    </li>
+                    <li>
+                        <span class="list-title">Future-Focused Learning:</span>
+                        Actively engaging with fundamental <strong>Machine Learning</strong> algorithms, constantly
+                        expanding my knowledge base to incorporate predictive analytics and advanced data modeling into
+                        my projects.
+                    </li>
+                </ul>
+
+                <p class="conclusion-text">
+                    I am dedicated to making data impactful—whether it's through a complex ML model running in the
+                    backend or a pixel-perfect, interactive data dashboard on the screen. Let's build something
+                    powerful.
+                </p>
+
+                <hr class="section-divider">
+
+                <div class="education-experience-grid">
+                    <!-- Education Column -->
+                    <div>
+                        <h3 class="section-subtitle">Education</h3>
+                        <div class="timeline-container">
+                            <!-- B.Tech -->
+                            <div class="timeline-item">
+                                <div class="timeline-dot"></div>
+                                <span class="timeline-date">2023 - 2027</span>
+                                <h4 class="timeline-title">B.Tech, Computer Science & Engineering</h4>
+                                <p class="timeline-desc">Shri Ramswaroop Memorial University, Lucknow</p>
+                            </div>
+                            <!-- XII -->
+                            <div class="timeline-item">
+                                <div class="timeline-dot"></div>
+                                <span class="timeline-date">2023</span>
+                                <h4 class="timeline-title">Senior Secondary (XII), Science</h4>
+                                <p class="timeline-desc">SRK Public Inter College (UPMSP) - 75.80%</p>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Experience Column -->
+                    <div>
+                        <h3 class="section-subtitle">Experience</h3>
+                        <div class="timeline-container">
+                            <!-- Joint Secretary -->
+                            <div class="timeline-item">
+                                <div class="timeline-dot"></div>
+                                <span class="timeline-date">2025 - 2026</span>
+                                <h4 class="timeline-title">Joint Secretary - TFC Club</h4>
+                                <p class="timeline-desc">Assisted in planning and execution of club activities.</p>
+                            </div>
+                            <!-- Coordinator -->
+                            <div class="timeline-item">
+                                <div class="timeline-dot"></div>
+                                <span class="timeline-date">2024 - 2025</span>
+                                <h4 class="timeline-title">Coordinator - TFC Club</h4>
+                                <p class="timeline-desc">Organized and managed events and workshops.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="social-links">
+                <a href="https://www.linkedin.com/in/sabhyatasingh/" aria-label="LinkedIn"><i data-lucide="linkedin"></i></a>
+                <a href="https://github.com/SabhyataSingh" aria-label="GitHub"><i data-lucide="github"></i></a>
+            </div>
+            <p>&copy; <span id="current-year"></span> Sabhyata Singh. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        lucide.createIcons();
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+
+        document.getElementById('mobile-menu-button').addEventListener('click', () => {
+            const mobileMenu = document.getElementById('mobile-menu');
+            if (mobileMenu.style.display === 'block') {
+                mobileMenu.style.display = 'none';
+            } else {
+                mobileMenu.style.display = 'block';
+            }
+        });
+    </script>
+</body>
+
+</html>
